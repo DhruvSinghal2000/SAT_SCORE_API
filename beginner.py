@@ -29,7 +29,7 @@ def home_page():
     return "Welcome to test API"
 
 
-@app.route('/attempts/sectionTotalScore/<attempt_id>',  methods=['GET'])
+@app.route('/attempts/sectionTotalScore/<attempt_id>', methods=['GET'])
 def get_one_attempt(attempt_id):
     attemptdet = mongo.db.attemptdetails
     practiceSet = mongo.db.practicesets
@@ -53,20 +53,17 @@ def get_one_attempt(attempt_id):
     writingScore = raw_score_conversion_table[3][raw_score_conversion_table[0].index(totalWriting)]
     mathScore = raw_score_conversion_table[1][raw_score_conversion_table[0].index(totalMaths)]
 
-
-    evidenceBased = (readingScore + writingScore)*10
+    evidenceBased = (readingScore + writingScore) * 10
     totalScore = evidenceBased + mathScore
 
-    output = { "result" : {"totalScore" : totalScore,
-                 "Readingtest Score" : readingScore * 10,
-                "Writing and Language": writingScore * 10,
-                "Math Score": mathScore}
+    output = {"result": {"totalScore": totalScore,
+                         "Readingtest Score": readingScore * 10,
+                         "Writing and Language": writingScore * 10,
+                         "Math Score": mathScore}
               }
     return dumps(output)
 
 
-
 app.run()
-
 
 # get_one_attempt("5d6be0d82931ad1966a61dc2")
